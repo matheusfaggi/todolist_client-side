@@ -10,7 +10,7 @@ body {
 #app{
   display: flex;
   flex-direction: column;
-  border: 1px solid white;
+  border: 1px solid #676767;
   border-radius: 5px;
   width: 500px;
   margin-top:100px;
@@ -18,48 +18,42 @@ body {
   background-color:#0e1013;
 }
 #header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color:#15181c;
   border-radius: 5px;
   padding: 5px;
   color:#FFAD1F;
 }
-#header>i{
-  align-items: flex-end;
-}
-.task{
-  margin-left: 5px;
-  margin-right: 35px;
-  margin-top:10px;
+.task-form{
   display: flex;
-}
-.member1{
-  display: flex;
-  margin-top:15px;
-  margin-left: 10px;
-  height: 100%;
-}
-.member2{
-  padding: 5px;
-  display: flex;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
-  align-items: center;
-  justify-content: flex-start;
 }
-.member3{
-  display: flex;
-  margin-top:7px;
-  margin-left: 5px;
-  margin-right: -10px;
-
-  height: 100%;
+.btn-task{
+  background: chartreuse;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .task-input,.task-input:focus{
   background-color:#15181c;
   border:none;
   border-bottom: 1px solid #fff;
+  width: 200px;
+  margin-right: 15px;
+  flex-shrink: 0;
 }
-.task-label{
-  color:#fff;
-  font-size: 24px;
-  margin-top:5px;
+.task-list{
+  margin: 20px 5px 20px 5px;
+}
+.task{
+  display: flex;
+  justify-content: space-between;
+}
+.list-group-item-newdark{
+  background-color: lightslategrey;
+  text-decoration: line-through;
 }
