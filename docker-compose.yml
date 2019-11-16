@@ -1,0 +1,10 @@
+  webpack:
+    build: ./src/app/views/
+    container_name: client-side
+    working_dir: /home/node/app
+    volumes: 
+      - ./src/app/views/:/home/node/app/
+    ports:
+      - 3001:3001
+    links:
+      - node

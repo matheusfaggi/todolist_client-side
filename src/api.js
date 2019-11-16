@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-const api = axios.create({
-    baseURL: 'https://api.github.com',
-})
-
-export default api;
+class Api {
+  constructor() {
+    const ApiNode = axios.create({
+      baseURL: 'localhost:3000',
+    });
+    this.ApiNode = ApiNode;
+  }
+}
+export default new Api().ApiNode;
