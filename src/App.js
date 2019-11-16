@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import TodoList from './components/TodoList';
 
 
 
 function App() {
-  return <h1>todolist vem pesado</h1>
+  return <TodoList />;
 }
 
 export default App;
