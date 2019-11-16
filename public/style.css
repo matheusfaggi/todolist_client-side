@@ -26,17 +26,40 @@ body {
 #header>i{
   align-items: flex-end;
 }
-.tasks{
+.task{
+  margin-left: 5px;
+  margin-right: 35px;
+  margin-top:10px;
+  display: flex;
+}
+.member1{
+  display: flex;
+  margin-top:15px;
+  margin-left: 10px;
+  height: 100%;
+}
+.member2{
   padding: 5px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
 }
-.inputText, .inputText:hover,.inputText:focus-within{
-  background:none;
+.member3{
+  display: flex;
+  margin-top:7px;
+  margin-left: 5px;
+  margin-right: -10px;
+
+  height: 100%;
+}
+.task-input,.task-input:focus{
+  background-color:#15181c;
   border:none;
-  border-bottom:1px solid #434a52;
-  border-radius:0;
-  box-shadow:none;
-  outline:none;
-  color:white;
+  border-bottom: 1px solid #fff;
 }
-
-
+.task-label{
+  color:#fff;
+  font-size: 24px;
+  margin-top:5px;
+}
