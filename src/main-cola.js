@@ -48,7 +48,7 @@ class App{
             this.inputEl.value = '';
     
             this.render();
-        }catch{
+        } catch {
             console.warn("Repositório não encontrado")
             alert("O repositório não existe");
         }

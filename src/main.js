@@ -7,7 +7,13 @@ class App {
   }
 
   async getTasks() {
-    const tasks = await api.get('/').catch((e) => console.log(e));
+    const tasks = await api.get('/')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((response) => {
+        console.log(response);
+      });
     return tasks;
   }
 }
