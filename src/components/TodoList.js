@@ -10,6 +10,9 @@ import api from '../api';
 
 
 class TodoList extends Component {
+  static defaultProp = {
+    task: 'Olá'
+  }
   state = {
     newTask: '',
     tasks: [
@@ -52,13 +55,16 @@ class TodoList extends Component {
           Add task
         </Button>
         <ul id="list-task">
-          {tasks.map(task=>(<TodoItem key={task} task={task}/>))}
-
-          {
-            <li key={newTask} className="new-task">
-            <FormLabel>{newTask}</FormLabel>
-            </li>  
-          }
+          {tasks.map(task=>(
+          <TodoItem 
+            key={task} 
+            task={task} 
+            onDelete={()=>this.handleDelete(task)}
+          />
+          ))}
+          <TodoItem 
+          isNew={true}
+          task={newTask}/> 
         </ul>
       </form>
     );
