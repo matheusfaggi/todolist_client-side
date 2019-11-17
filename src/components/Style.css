@@ -18,16 +18,38 @@
   align-items: center;
   margin: 25px 0 0 0;
   padding: 0;
-  
 }
-#form-task {
-  padding:10px;
+#form-todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  margin: 0px 0px 0px 0px;
 }
 #input-task {
+  display: flex;
+  flex: 1;
+  flex-grow: 1;
   width: 100%;
 }
 #btn-task {
-  margin: 0px 0px 0px 20px;
+  display: flex;
 }
+.tools-task{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-content: flex-end;
+}
+#form-task {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-arround;
+  width: 100%;
+}
+.text-description{
+  text-decoration: line-through;
+}
+
 
 

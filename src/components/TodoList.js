@@ -32,11 +32,9 @@ class TodoList extends Component {
         task_description: this.state.newTask,
     }
     const response  = await api.post('/task',params);
-    console.log(response)
   }
   deleteTask = async (task) => {
     const dbTasks = await this.getTasks();
-    console.log(task)
     const id = dbTasks.filter(item=>item.task_description === task).map(item=>item.id);
     api.delete('/task',{
       data: {
@@ -70,32 +68,42 @@ class TodoList extends Component {
     this.deleteTask(task);
     this.setState({ tasks: this.state.tasks.filter(t => t !== task)})
   }
+  handleEdit = (task) => {
+    console.log(task)
+  }
   
   render () {
     const { tasks, newTask } = this.state;
 
     return(
-      <form onSubmit={this.handleSubmit} id="form-task"> 
-        <Input 
-          type="text" 
-          onChange={this.handleInputChange}
-          value={newTask}
-          id="input-task"
-        />
-        <Button 
-          variant="contained" 
-          color="primary" 
-          type="submit"
-          id="btn-task"
-        >
-          Add task
-        </Button>
+      <form onSubmit={this.handleSubmit} id="form-todo">
+        <div id="form-task">
+          <div id="input-task">
+            <Input 
+              type="text" 
+              onChange={this.handleInputChange}
+              value={newTask}
+            />
+          </div>
+          <div id="btn-task">
+            <Button 
+              variant="contained" 
+              color="primary" 
+              type="submit"
+              id="btn-task"
+              >
+              Add task
+            </Button>
+          </div>
+          
+        </div>
         <ul id="list-task">
           {tasks.map(task=>(
           <TodoItem 
             key={task} 
             task={task} 
             onDelete={()=>this.handleDelete(task)}
+            onEdit={()=>this.handleEdit(task)}
           />
           ))}
           <TodoItem 
