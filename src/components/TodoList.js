@@ -10,9 +10,6 @@ import api from '../api';
 
 
 class TodoList extends Component {
-  static defaultProp = {
-    task: 'Olá'
-  }
   state = {
     newTask: '',
     tasks: [
@@ -22,16 +19,12 @@ class TodoList extends Component {
     super();
     this.setTasks(); 
   }
-  handleInputChange  = (e) => {
-    const { value } = e.target;
-    this.setState({ newTask: value});
-    
-  }
+  
   postTask = async (e) => {
     const params = {
         task_description: this.state.newTask,
     }
-    const response  = await api.post('/task',params);
+    const response = await api.post('/task',params);
   }
   deleteTask = async (task) => {
     const dbTasks = await this.getTasks();
@@ -55,10 +48,16 @@ class TodoList extends Component {
       tasks: [ ...dbTasks]
     })
   }
+  
   handleSubmit =  (e) => {
     e.preventDefault();
-    this.postTask(e);
+    // this.postTask(e);
     const { tasks, newTask } = this.state;
+
+    console.log(`tasks: ${tasks.join(', ')}`)
+    console.log(`event: ${e.target.value}`)
+    console.log(`state: ${newTask}`)
+
     this.setState({ 
       tasks: [...tasks, newTask] ,
       newTask: ''
@@ -68,47 +67,25 @@ class TodoList extends Component {
     this.deleteTask(task);
     this.setState({ tasks: this.state.tasks.filter(t => t !== task)})
   }
-  handleEdit = (task) => {
-    console.log(task)
-  }
   
   render () {
     const { tasks, newTask } = this.state;
 
     return(
       <form onSubmit={this.handleSubmit} id="form-todo">
-        <div id="form-task">
-          <div id="input-task">
-            <Input 
-              type="text" 
-              onChange={this.handleInputChange}
-              value={newTask}
-            />
-          </div>
-          <div id="btn-task">
-            <Button 
-              variant="contained" 
-              color="primary" 
-              type="submit"
-              id="btn-task"
-              >
-              Add task
-            </Button>
-          </div>
-          
-        </div>
+        
         <ul id="list-task">
           {tasks.map(task=>(
           <TodoItem 
             key={task} 
-            task={task} 
+            task={task}
             onDelete={()=>this.handleDelete(task)}
-            onEdit={()=>this.handleEdit(task)}
           />
           ))}
           <TodoItem 
-          isNew={true}
-          task={newTask}/> 
+            isNew={true}
+            newTask={newTask}
+          /> 
         </ul>
       </form>
     );
