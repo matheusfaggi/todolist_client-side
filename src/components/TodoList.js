@@ -9,7 +9,6 @@ import { deepOrange, blueGrey } from '@material-ui/core/colors'
 import api from '../api'
 
 class TodoList extends Component {
-<<<<<<< HEAD
   static defaultProp = {
     task: 'Olá'
   }
@@ -112,67 +111,6 @@ class TodoList extends Component {
         </ul>
       </form>
     );
-=======
-    state = {
-        newTask: '',
-        tasks: [],
-    }
-    constructor() {
-        super()
-        this.setTasks()
-    }
-
-    postTask = async e => {
-        const params = {
-            task_description: this.state.newTask,
-        }
-        const response = await api.post('/task', params)
-    }
-    deleteTask = async task => {
-        const dbTasks = await this.getTasks()
-        const id = dbTasks
-            .filter(item => item.task_description === task)
-            .map(item => item.id)
-        api.delete('/task', {
-            data: {
-                id,
-            },
-        })
-    }
-    getTasks = async () => {
-        const response = await api
-            .get('/tasks')
-            .then(response => response.data.map(item => item))
-        return response
-    }
-
-    setTasks = async () => {
-        const tasksDb = await this.getTasks()
-        const dbTasks = tasksDb.map(item => item.task_description)
-        this.setState({
-            tasks: [...dbTasks],
-        })
-    }
-
-    handleSubmit = e => {
-        e.preventDefault()
-        // this.postTask(e);
-        const { tasks, newTask } = this.state
-
-        console.log(`tasks: ${tasks.join(', ')}`)
-        console.log(`event: ${e.target.value}`)
-        console.log(`state: ${newTask}`)
-
-        this.setState({
-            tasks: [...tasks, newTask],
-            newTask: '',
-        })
-    }
-    handleDelete = task => {
-        this.deleteTask(task)
-        this.setState({ tasks: this.state.tasks.filter(t => t !== task) })
-    }
->>>>>>> 2cfafa0... Refatoração com eslint :)
 
     render() {
         const { tasks, newTask } = this.state
