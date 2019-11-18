@@ -8,44 +8,43 @@ import IconButton from '@material-ui/core/IconButton'
 import Checkbox from '@material-ui/core/Checkbox'
 import PropTypes from 'prop-types'
 import './Style.css'
+import { __makeTemplateObject } from 'tslib'
 
 class TodoItem extends Component {
+    constructor(props) {
+        super(props)
+    }
     state = {
+        textTask: '',
         toggleEdit: true,
-        newTask: '',
     }
 
     static defaultProps = {
         isNew: false,
-        newTask: '',
-    }
-    onEdit = async () => {
-        this.setState({ toggleEdit: !this.state.toggleEdit })
-    }
-    handleInputChange = e => {
-        const { value } = e.target
-        this.setState({ newTask: value })
     }
 
     render() {
-        const { onDelete, task, isNew, onSubmit } = this.props
-        const { toggleEdit, newTask } = this.state
+        const {
+            onDelete,
+            handleSubmit,
+            isNew,
+            handleInputChange,
+            task,
+        } = this.props
+        const { toggleEdit } = this.state
         if (isNew) {
             return (
                 <li className="task">
                     <div className="task-description">
                         <Input
                             type="text"
-                            value={newTask}
-                            onChange={this.handleInputChange}
+                            value={task}
+                            onChange={handleInputChange}
+                            onSubmit={handleSubmit}
                         ></Input>
                     </div>
                     <div className="tools-task">
-                        <IconButton
-                            onClick={onSubmit}
-                            type="submit"
-                            newTask={newTask}
-                        >
+                        <IconButton type="submit">
                             <Save></Save>
                         </IconButton>
                     </div>
@@ -61,7 +60,7 @@ class TodoItem extends Component {
                         ) : null}
                     </div>
                     <div className="tools-task">
-                        <IconButton onClick={this.onEdit}>
+                        <IconButton type="submit">
                             {toggleEdit ? <Edit></Edit> : <Save></Save>}
                         </IconButton>
 
@@ -77,9 +76,10 @@ class TodoItem extends Component {
 
 TodoItem.propTypes = {
     onDelete: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    handleInputChange: PropTypes.func,
     task: PropTypes.string,
     isNew: PropTypes.bool,
-    onSubmit: PropTypes.func,
 }
 
 export default TodoItem

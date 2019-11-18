@@ -5,8 +5,7 @@ import TodoItem from './TodoItem'
 import './Style.css'
 import { makeStyles } from '@material-ui/core/styles'
 import { deepOrange, blueGrey } from '@material-ui/core/colors'
-
-import api from '../api'
+import api from '../Api'
 
 class TodoList extends Component {
     state = {
@@ -55,18 +54,17 @@ class TodoList extends Component {
         // this.postTask(e);
         const { tasks, newTask } = this.state
 
-        console.log(`tasks: ${tasks.join(', ')}`)
-        console.log(`event: ${e.target.value}`)
-        console.log(`state: ${newTask}`)
-
-        this.setState({
-            tasks: [...tasks, newTask],
-            newTask: '',
-        })
+        // this.setState({
+        //     tasks: [...tasks, newTask],
+        //     newTask:,
+        // })
     }
     handleDelete = task => {
         this.deleteTask(task)
         this.setState({ tasks: this.state.tasks.filter(t => t !== task) })
+    }
+    handleInputChange = () => {
+        console.log('aa')
     }
 
     render() {
@@ -80,12 +78,21 @@ class TodoList extends Component {
                             key={task}
                             task={task}
                             onDelete={() => this.handleDelete(task)}
+                            onChange={() => this.handleInputChange}
                         />
                     ))}
-                    <TodoItem isNew={true} newTask={newTask} />
+                    <TodoItem
+                        key={newTask}
+                        task={newTask}
+                        isNew={true}
+                        onChange
+                        onDelete={() => this.handleDelete(task)}
+                        onChange={() => this.handleInputChange}
+                    />
                 </ul>
             </form>
         )
     }
 }
+
 export default TodoList
