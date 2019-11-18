@@ -42,6 +42,15 @@ class TodoList extends Component {
     }
 
     setTasks = async () => {
+        if (this.state.tasks) {
+            const inserts = [
+                { task_description: 'First task' },
+                { task_description: 'Second task' },
+                { task_description: 'Third task' },
+            ]
+            inserts.map(async item => await api.post('/task', item))
+        }
+
         const tasksDb = await this.getTasks()
         const dbTasks = tasksDb.map(item => item.task_description)
         this.setState({
@@ -85,7 +94,6 @@ class TodoList extends Component {
                         key={newTask}
                         task={newTask}
                         isNew={true}
-                        onChange
                         onDelete={() => this.handleDelete(task)}
                         onChange={() => this.handleInputChange}
                     />
