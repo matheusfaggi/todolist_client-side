@@ -75,6 +75,12 @@ class TodoList extends Component {
     handleInputChange = () => {
         console.log('aa')
     }
+    handleEdit = task => {
+        console.log(task)
+    }
+    changeHandler = task => {
+        this.setState({ newTask: task })
+    }
 
     render() {
         const { tasks, newTask } = this.state
