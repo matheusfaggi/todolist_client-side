@@ -20,10 +20,6 @@ class TodoList extends Component {
         super()
         this.setTasks()
     }
-    handleInputChange = e => {
-        const { value } = e.target
-        this.setState({ newTask: value })
-    }
     postTask = async e => {
         const params = {
             task_description: this.state.newTask,
@@ -71,41 +67,30 @@ class TodoList extends Component {
     handleEdit = task => {
         console.log(task)
     }
+    changeHandler = task => {
+        this.setState({ newTask: task })
+    }
 
     render() {
         const { tasks, newTask } = this.state
 
         return (
             <form onSubmit={this.handleSubmit} id="form-todo">
-                <div id="form-task">
-                    <div id="input-task">
-                        <Input
-                            type="text"
-                            onChange={this.handleInputChange}
-                            value={newTask}
-                        />
-                    </div>
-                    <div id="btn-task">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            id="btn-task"
-                        >
-                            Add task
-                        </Button>
-                    </div>
-                </div>
                 <ul id="list-task">
                     {tasks.map(task => (
                         <TodoItem
                             key={task}
                             task={task}
                             onDelete={() => this.handleDelete(task)}
-                            onEdit={() => this.handleEdit(task)}
+                            handleEdit={() => this.handleEdit(task)}
+                            onChange={this.changeHandler}
                         />
                     ))}
-                    <TodoItem isNew={true} task={newTask} />
+                    <TodoItem
+                        isNew={true}
+                        task={newTask}
+                        onChange={this.changeHandler}
+                    />
                 </ul>
             </form>
         )
