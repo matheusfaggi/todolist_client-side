@@ -15,22 +15,19 @@ class TodoItem extends Component {
         super(props)
     }
     state = {
-        textTask: '',
         toggleEdit: true,
     }
 
     static defaultProps = {
         isNew: false,
     }
-
+    inputHandler = e => {
+        e.preventDefault()
+        const { value } = e.target
+        this.props.onChange(value)
+    }
     render() {
-        const {
-            onDelete,
-            handleSubmit,
-            isNew,
-            handleInputChange,
-            task,
-        } = this.props
+        const { onDelete, handleSubmit, isNew, task } = this.props
         const { toggleEdit } = this.state
         if (isNew) {
             return (
@@ -39,7 +36,7 @@ class TodoItem extends Component {
                         <Input
                             type="text"
                             value={task}
-                            onChange={handleInputChange}
+                            onChange={this.inputHandler}
                             onSubmit={handleSubmit}
                         ></Input>
                     </div>

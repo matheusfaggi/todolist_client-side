@@ -42,15 +42,6 @@ class TodoList extends Component {
     }
 
     setTasks = async () => {
-        if (this.state.tasks) {
-            const inserts = [
-                { task_description: 'First task' },
-                { task_description: 'Second task' },
-                { task_description: 'Third task' },
-            ]
-            inserts.map(async item => await api.post('/task', item))
-        }
-
         const tasksDb = await this.getTasks()
         const dbTasks = tasksDb.map(item => item.task_description)
         this.setState({
@@ -63,18 +54,16 @@ class TodoList extends Component {
         // this.postTask(e);
         const { tasks, newTask } = this.state
 
-        // this.setState({
-        //     tasks: [...tasks, newTask],
-        //     newTask:,
-        // })
+        this.setState({
+            tasks: [...tasks, newTask],
+            newTask: '',
+        })
     }
     handleDelete = task => {
         this.deleteTask(task)
         this.setState({ tasks: this.state.tasks.filter(t => t !== task) })
     }
-    handleInputChange = () => {
-        console.log('aa')
-    }
+
     handleEdit = task => {
         console.log(task)
     }
@@ -93,7 +82,7 @@ class TodoList extends Component {
                             key={task}
                             task={task}
                             onDelete={() => this.handleDelete(task)}
-                            onChange={() => this.handleInputChange}
+                            onChange={this.changeHandler}
                         />
                     ))}
                     <TodoItem
@@ -101,7 +90,7 @@ class TodoList extends Component {
                         task={newTask}
                         isNew={true}
                         onDelete={() => this.handleDelete(task)}
-                        onChange={() => this.handleInputChange}
+                        onChange={this.changeHandler}
                     />
                 </ul>
             </form>
